@@ -39,7 +39,7 @@ char	*ft_get_line(char	*stock_arr)
 	int		i;
 
 	i = 0;
-	while (stock_arr[i] != '\n')
+	while (stock_arr[i] && stock_arr[i] != '\n')
 		i++;
 	snew = malloc(sizeof(char) * (i + 2));
 	if (!snew)
@@ -70,17 +70,19 @@ char	*stock_rest(char *stock_arr)
 
 	i = 0;
 	j = 0;
-	while (stock_arr[i] != '\n')
+	while (stock_arr[i] && stock_arr[i] != '\n')
 		i++;
+    new_str = malloc(sizeof(char) * (ft_strlen(stock_arr) - i + 1));
+    if (!new_str)
+        return (NULL);
     i++;
-    new_str = malloc(sizeof(char) * ft_strlen(stock_arr) - i + 1);
 	while (stock_arr[i])
 	{
 		new_str[j] = stock_arr[i];
 		j++;
 		i++;
 	}
-	new_str[j] = '\0';
+    new_str[j] = 0;
     free(stock_arr);
 	return (new_str);
 }
