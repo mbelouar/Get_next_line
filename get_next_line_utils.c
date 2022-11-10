@@ -6,7 +6,7 @@
 /*   By: mbelouar <mbelouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 21:07:51 by mbelouar          #+#    #+#             */
-/*   Updated: 2022/11/01 23:40:46 by mbelouar         ###   ########.fr       */
+/*   Updated: 2022/11/10 21:43:09 by mbelouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int ft_strlen(char *str)
 {
     int i;
 
+	if (!str)
+		return (0);
     i = 0;
     while (str[i])
         i++;
