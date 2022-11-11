@@ -6,36 +6,36 @@
 /*   By: mbelouar <mbelouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 21:07:33 by mbelouar          #+#    #+#             */
-/*   Updated: 2022/11/11 01:30:06 by mbelouar         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:04:16 by mbelouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char    *ft_read(int fd, char *stock_arr)
+char	*ft_read(int fd, char *stock_arr)
 {
-    char    *buffer;
-    int     bytes_read;
+	char	*buffer;
+	int		bytes_read;
 
-    buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
-    if (!buffer)
-        return (NULL);
-    bytes_read = 1;
-    while (bytes_read > 0)
-    {
-        bytes_read = read(fd, buffer, BUFFER_SIZE);
-        if (bytes_read < 0)
-        {
-            free(buffer);
-            return (NULL);
-        }
-        buffer[bytes_read] = 0;
-        stock_arr = ft_strjoin(stock_arr, buffer);
-        if (ft_strchr(buffer, '\n'))
-            break;
-    }
-    free(buffer);
-    return (stock_arr);
+	buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!buffer)
+		return (NULL);
+	bytes_read = 1;
+	while (bytes_read > 0)
+	{
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read < 0)
+		{
+			free(buffer);
+			return (NULL);
+		}
+		buffer[bytes_read] = '\0';
+		stock_arr = ft_strjoin(stock_arr, buffer);
+		if (ft_strchr(buffer, '\n'))
+			break;
+	}
+	free(buffer);
+	return (stock_arr);
 }
 
 char	*ft_get_line(char	*stock_arr)
@@ -79,7 +79,7 @@ char	*stock_rest(char *stock_arr)
 
 	i = 0;
 	j = 0;
-   
+
     if (!stock_arr[i])
     {
         free(stock_arr);
@@ -87,15 +87,19 @@ char	*stock_rest(char *stock_arr)
     }
     while (stock_arr[i] && stock_arr[i] != '\n')
         i++;
-    i++;
     new_str = malloc(sizeof(char) * (ft_strlen(stock_arr) - i + 1));
+    if (!new_str)
+        return (NULL);
+    if (i == ft_strlen(stock_arr))
+    {
+        if(new_str)
+            free(new_str);
+        free(stock_arr);
+        return NULL;
+    }
+    i++;
 	while (stock_arr[i])
         new_str[j++] = stock_arr[i++];
-    if (stock_arr[i] == '\n')
-    {
-        new_str[i] = '\n';
-        i++;
-    }
     new_str[j] = 0;
     free(stock_arr);
 	return (new_str);
@@ -118,16 +122,31 @@ char    *get_next_line(int fd)
 
 // int main()
 // {
-//     int fd = open("big_line_no_nl.txt", O_RDONLY);
+//     int fd = open("42_no_nl.txt", O_RDONLY);
 //     char *r;
+//     // int i;
     
-//     r = get_next_line(fd);
-//     printf("Line 1 : %s\n", r);
-//     free(r);
+//     // i = 0;
+//     // while(1)
+//     // {
+//     //     i++;
+//     //      r = get_next_line(fd);
+//     //     printf("Line %d : %s\n", i,r);
+//     //     free(r);
+//     //     if(!r)
+//     //         break;
+//     // }
+    
 //     r = get_next_line(fd);
 //     printf("Line 2 : %s\n", r);
 //     free(r);
 //     r = get_next_line(fd);
 //     printf("Line 3 : %s\n", r);
+//     free(r);
+//     r = get_next_line(fd);
+//     printf("Line 3 : %s\n", r);
+//     free(r);
+//     r = get_next_line(fd);
+//     printf("Line 4 : %s\n", r);
 //     free(r);
 // }
