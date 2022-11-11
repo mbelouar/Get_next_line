@@ -6,7 +6,7 @@
 /*   By: mbelouar <mbelouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 21:07:33 by mbelouar          #+#    #+#             */
-/*   Updated: 2022/11/10 23:31:41 by mbelouar         ###   ########.fr       */
+/*   Updated: 2022/11/11 01:30:06 by mbelouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ char	*ft_get_line(char	*stock_arr)
 
 	i = 0;
     if(!stock_arr[0])
-        return NULL;
+        return (NULL);
 	while (stock_arr[i] && stock_arr[i] != '\n')
 		i++;
-	snew = malloc((i + 2));
+	snew = malloc(sizeof(char) * (i + 2));
 	if (!snew)
 		return (NULL);
 	i = 0;
@@ -118,7 +118,7 @@ char    *get_next_line(int fd)
 
 // int main()
 // {
-//     int fd = open("41_with_nl.txt", O_RDONLY);
+//     int fd = open("big_line_no_nl.txt", O_RDONLY);
 //     char *r;
     
 //     r = get_next_line(fd);
