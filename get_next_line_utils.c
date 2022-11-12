@@ -27,29 +27,26 @@ int	ft_strlen(char *str)
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*final_str;
-	size_t	i;
-	size_t	j;
-	size_t	len_s1;
-	size_t	len_s2;
+	int		size_total;
+	int		i;
+	int		j;
 
 	if (!s1)
 	{
 		s1 = malloc(sizeof(char));
 		s1[0] = '\0';
 	}
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	i = 0;
-	j = 0;
-	final_str = (char *)malloc(sizeof(char) * (len_s1 + len_s2 + 1));
+	size_total = ft_strlen(s1) + ft_strlen(s2);
+	i = -1;
+	final_str = (char *)malloc(sizeof(char) * (size_total + 1));
 	if (!final_str)
 		return (NULL);
-	while (i < len_s1)
-		final_str[j++] = s1[i++];
-	i = 0;
-	while (i < len_s2)
-		final_str[j++] = s2[i++];
-	final_str[j] = '\0';
+	while (s1[++i])
+		final_str[i] = s1[i];
+	j = 0;
+	while (s2[j])
+		final_str[i++] = s2[j++];
+	final_str[size_total] = '\0';
 	free(s1);
 	return (final_str);
 }
