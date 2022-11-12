@@ -6,7 +6,7 @@
 /*   By: mbelouar <mbelouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 21:07:44 by mbelouar          #+#    #+#             */
-/*   Updated: 2022/11/10 15:57:20 by mbelouar         ###   ########.fr       */
+/*   Updated: 2022/11/12 18:18:55 by mbelouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <string.h>
 # include <fcntl.h>
 # include <stdio.h>
-// # include "Memd/mem.h"
 
-char    *get_next_line(int fd);
+char	*get_next_line(int fd);
 char	*ft_strchr(char *str, int c);
 char	*ft_strjoin(char *s1, char *s2);
-int     ft_strlen(char *str);
+char	*ft_fill_rest(char *stock_arr, char *new_str, int i);
+int		ft_strlen(char *str);
 
 #endif

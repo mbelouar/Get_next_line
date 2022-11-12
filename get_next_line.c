@@ -6,7 +6,7 @@
 /*   By: mbelouar <mbelouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 21:07:33 by mbelouar          #+#    #+#             */
-/*   Updated: 2022/11/11 23:04:16 by mbelouar         ###   ########.fr       */
+/*   Updated: 2022/11/12 17:17:51 by mbelouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,14 @@ char	*ft_read(int fd, char *stock_arr)
 		buffer[bytes_read] = '\0';
 		stock_arr = ft_strjoin(stock_arr, buffer);
 		if (ft_strchr(buffer, '\n'))
-			break;
+			break ;
 	}
 	free(buffer);
 	return (stock_arr);
 }
 
-char	*ft_get_line(char	*stock_arr)
+char	*ft_fill_line(char *stock_arr, char *snew, int i)
 {
-	char	*snew;
-	int		i;
-
-	i = 0;
-    if(!stock_arr[0])
-        return (NULL);
-	while (stock_arr[i] && stock_arr[i] != '\n')
-		i++;
-	snew = malloc(sizeof(char) * (i + 2));
-	if (!snew)
-		return (NULL);
-	i = 0;
 	while (stock_arr[i])
 	{
 		if (stock_arr[i] != '\n')
@@ -63,90 +51,73 @@ char	*ft_get_line(char	*stock_arr)
 		{
 			snew[i] = '\n';
 			snew[i + 1] = '\0';
-			break;
+			break ;
 		}
-        else
-            snew[i] = '\0';
+		else
+			snew[i] = '\0';
 	}
 	return (snew);
 }
 
-char	*stock_rest(char *stock_arr)
+char	*ft_get_line(char *stock_arr)
 {
-    char    *new_str;
-	int	i;
-	int	j;
+	char	*snew;
+	char	*str_after_fill;
+	int		i;
 
 	i = 0;
-	j = 0;
-
-    if (!stock_arr[i])
-    {
-        free(stock_arr);
-        return (NULL);
-    }
-    while (stock_arr[i] && stock_arr[i] != '\n')
-        i++;
-    new_str = malloc(sizeof(char) * (ft_strlen(stock_arr) - i + 1));
-    if (!new_str)
-        return (NULL);
-    if (i == ft_strlen(stock_arr))
-    {
-        if(new_str)
-            free(new_str);
-        free(stock_arr);
-        return NULL;
-    }
-    i++;
-	while (stock_arr[i])
-        new_str[j++] = stock_arr[i++];
-    new_str[j] = 0;
-    free(stock_arr);
-	return (new_str);
+	if (!stock_arr[0])
+		return (NULL);
+	while (stock_arr[i] && stock_arr[i] != '\n')
+		i++;
+	snew = malloc(sizeof(char) * (i + 2));
+	if (!snew)
+		return (NULL);
+	i = 0;
+	str_after_fill = ft_fill_line(stock_arr, snew, i);
+	return (str_after_fill);
 }
 
-char    *get_next_line(int fd)
+char	*stock_rest(char *stock_arr)
 {
-    static char     *stock_arr;
-    char            *line;
-   
-    if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-        return (NULL);
-    stock_arr = ft_read(fd, stock_arr);
-    if(!stock_arr)
-        return (NULL); 
-    line = ft_get_line(stock_arr);
-    stock_arr = stock_rest(stock_arr);
-    return (line);
+	char	*new_str;
+	char	*str_after_fill;
+	int		i;
+
+	i = 0;
+	if (!stock_arr[i])
+	{
+		free(stock_arr);
+		return (NULL);
+	}
+	while (stock_arr[i] && stock_arr[i] != '\n')
+		i++;
+	new_str = malloc(sizeof(char) * (ft_strlen(stock_arr) - i + 1));
+	if (!new_str)
+		return (NULL);
+	if (i == ft_strlen(stock_arr))
+	{
+		if (new_str)
+			free(new_str);
+		free(stock_arr);
+		return (NULL);
+	}
+	str_after_fill = ft_fill_rest(stock_arr, new_str, i);
+	free(stock_arr);
+	return (str_after_fill);
 }
 
-// int main()
-// {
-//     int fd = open("42_no_nl.txt", O_RDONLY);
-//     char *r;
-//     // int i;
-    
-//     // i = 0;
-//     // while(1)
-//     // {
-//     //     i++;
-//     //      r = get_next_line(fd);
-//     //     printf("Line %d : %s\n", i,r);
-//     //     free(r);
-//     //     if(!r)
-//     //         break;
-//     // }
-    
-//     r = get_next_line(fd);
-//     printf("Line 2 : %s\n", r);
-//     free(r);
-//     r = get_next_line(fd);
-//     printf("Line 3 : %s\n", r);
-//     free(r);
-//     r = get_next_line(fd);
-//     printf("Line 3 : %s\n", r);
-//     free(r);
-//     r = get_next_line(fd);
-//     printf("Line 4 : %s\n", r);
-//     free(r);
-// }
+char	*get_next_line(int fd)
+{
+	static char	*stock_arr;
+	char		*line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (NULL);
+	stock_arr = ft_read(fd, stock_arr);
+	if (!stock_arr)
+		return (NULL);
+	line = ft_get_line(stock_arr);
+	stock_arr = stock_rest(stock_arr);
+	return (line);
+}

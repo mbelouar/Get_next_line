@@ -6,26 +6,25 @@
 /*   By: mbelouar <mbelouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 21:07:51 by mbelouar          #+#    #+#             */
-/*   Updated: 2022/11/10 21:43:09 by mbelouar         ###   ########.fr       */
+/*   Updated: 2022/11/12 17:19:36 by mbelouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-    int i;
+	int	i;
 
 	if (!str)
 		return (0);
-    i = 0;
-    while (str[i])
-        i++;
-    return (i);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
-
 {
 	char	*final_str;
 	size_t	i;
@@ -34,12 +33,12 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	len_s2;
 
 	if (!s1)
-    {
-        s1 = malloc(sizeof(char));
-        s1[0] = '\0';
-    }
-	len_s1 = strlen(s1);
-	len_s2 = strlen(s2);
+	{
+		s1 = malloc(sizeof(char));
+		s1[0] = '\0';
+	}
+	len_s1 = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
 	i = 0;
 	j = 0;
 	final_str = (char *)malloc(sizeof(char) * (len_s1 + len_s2 + 1));
@@ -51,13 +50,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (i < len_s2)
 		final_str[j++] = s2[i++];
 	final_str[j] = '\0';
-    free(s1);
+	free(s1);
 	return (final_str);
 }
 
 char	*ft_strchr(char *str, int c)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (str[i] && str[i] != c)
@@ -65,4 +64,16 @@ char	*ft_strchr(char *str, int c)
 	if (str[i] == c)
 		return (&str[i]);
 	return (0);
+}
+
+char	*ft_fill_rest(char *stock_arr, char *new_str, int i)
+{
+	int	j;
+
+	j = 0;
+	i++;
+	while (stock_arr[i])
+		new_str[j++] = stock_arr[i++];
+	new_str[j] = 0;
+	return (new_str);
 }
