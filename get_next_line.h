@@ -6,7 +6,7 @@
 /*   By: mbelouar <mbelouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 21:07:44 by mbelouar          #+#    #+#             */
-/*   Updated: 2022/11/12 18:18:55 by mbelouar         ###   ########.fr       */
+/*   Updated: 2022/11/13 17:25:05 by mbelouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 
+void	*ft_calloc(size_t elementCount, size_t elementSize);
 char	*get_next_line(int fd);
 char	*ft_strchr(char *str, int c);
 char	*ft_strjoin(char *s1, char *s2);

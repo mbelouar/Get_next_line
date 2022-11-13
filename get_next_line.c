@@ -6,7 +6,7 @@
 /*   By: mbelouar <mbelouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 21:07:33 by mbelouar          #+#    #+#             */
-/*   Updated: 2022/11/12 17:17:51 by mbelouar         ###   ########.fr       */
+/*   Updated: 2022/11/13 17:24:36 by mbelouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	*stock_rest(char *stock_arr)
 	}
 	while (stock_arr[i] && stock_arr[i] != '\n')
 		i++;
-	new_str = malloc(sizeof(char) * (ft_strlen(stock_arr) - i + 1));
+	new_str = ft_calloc(sizeof(char), (ft_strlen(stock_arr) - i));
 	if (!new_str)
 		return (NULL);
 	if (i == ft_strlen(stock_arr))
@@ -112,7 +112,7 @@ char	*get_next_line(int fd)
 	static char	*stock_arr;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	stock_arr = ft_read(fd, stock_arr);
 	if (!stock_arr)

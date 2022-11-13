@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbelouar <mbelouar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mbelouar <mbelouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:22:30 by mbelouar          #+#    #+#             */
-/*   Updated: 2022/11/12 19:22:34 by mbelouar         ###   ########.fr       */
+/*   Updated: 2022/11/13 17:22:28 by mbelouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@ int	ft_strlen(char *str)
 	while (str[i])
 		i++;
 	return (i);
+}
+
+void	*ft_calloc(size_t elementCount, size_t elementSize)
+{
+	void	*str;
+
+	str = malloc(elementSize * elementCount);
+	if (!str)
+		return (0);
+	ft_bzero(str, elementCount * elementSize);
+	return (str);
 }
 
 char	*ft_strjoin(char *s1, char *s2)

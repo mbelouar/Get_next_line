@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbelouar <mbelouar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mbelouar <mbelouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:22:19 by mbelouar          #+#    #+#             */
-/*   Updated: 2022/11/12 19:22:20 by mbelouar         ###   ########.fr       */
+/*   Updated: 2022/11/13 17:25:49 by mbelouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <limits.h>
 
+void	*ft_calloc(size_t elementCount, size_t elementSize);
 char	*get_next_line(int fd);
 char	*ft_strchr(char *str, int c);
 char	*ft_strjoin(char *s1, char *s2);
