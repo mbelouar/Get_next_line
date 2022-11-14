@@ -6,7 +6,7 @@
 /*   By: mbelouar <mbelouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:22:30 by mbelouar          #+#    #+#             */
-/*   Updated: 2022/11/13 17:22:28 by mbelouar         ###   ########.fr       */
+/*   Updated: 2022/11/14 17:11:59 by mbelouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,15 @@ int	ft_strlen(char *str)
 
 void	*ft_calloc(size_t elementCount, size_t elementSize)
 {
-	void	*str;
+	char	*str;
+	size_t	i;
 
+	i = 0;
 	str = malloc(elementSize * elementCount);
 	if (!str)
 		return (0);
-	ft_bzero(str, elementCount * elementSize);
+	while (i < elementCount * elementSize)
+		str[i++] = 0;
 	return (str);
 }
 

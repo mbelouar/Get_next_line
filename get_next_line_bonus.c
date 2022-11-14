@@ -6,7 +6,7 @@
 /*   By: mbelouar <mbelouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:22:08 by mbelouar          #+#    #+#             */
-/*   Updated: 2022/11/13 17:25:30 by mbelouar         ###   ########.fr       */
+/*   Updated: 2022/11/14 17:20:06 by mbelouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*ft_read(int fd, char *stock_arr)
 		if (bytes_read < 0)
 		{
 			free(buffer);
+			free(stock_arr);
 			return (NULL);
 		}
 		buffer[bytes_read] = '\0';
@@ -92,7 +93,7 @@ char	*stock_rest(char *stock_arr)
 	}
 	while (stock_arr[i] && stock_arr[i] != '\n')
 		i++;
-	new_str = ft_calloc(sizeof(char), (ft_strlen(stock_arr) - i + 1));
+	new_str = ft_calloc((ft_strlen(stock_arr) - i + 1), sizeof(char));
 	if (!new_str)
 		return (NULL);
 	if (i == ft_strlen(stock_arr))
@@ -112,7 +113,7 @@ char	*get_next_line(int fd)
 	static char	*stock_arr[OPEN_MAX];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd == 1 || fd == 2 || BUFFER_SIZE <= 0)
 		return (NULL);
 	stock_arr[fd] = ft_read(fd, stock_arr[fd]);
 	if (!stock_arr[fd])

@@ -6,7 +6,7 @@
 /*   By: mbelouar <mbelouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:22:19 by mbelouar          #+#    #+#             */
-/*   Updated: 2022/11/13 17:25:49 by mbelouar         ###   ########.fr       */
+/*   Updated: 2022/11/14 17:24:59 by mbelouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
 # include <limits.h>
+
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 1000
+#endif
 
 void	*ft_calloc(size_t elementCount, size_t elementSize);
 char	*get_next_line(int fd);
